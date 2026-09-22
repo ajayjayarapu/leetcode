@@ -1,7 +1,14 @@
-package src.main.java.com.arraysandhashing;
+package com.arraysandhashing;
 
 import java.util.HashSet;
 import java.util.Set;
+
+/**
+ *
+ * leetcode: https://leetcode.com/problems/contains-duplicate/description/
+ * neetcode: https://neetcode.io/problems/duplicate-integer/question
+ *
+ */
 
 public class ContainsDuplicate {
 
@@ -36,13 +43,15 @@ public class ContainsDuplicate {
         if(nums.length <= 1)
             return false;
 
-        Set<Integer> exists = new HashSet<>();
+        Set<Integer> seen = new HashSet<>();
 
         for(int i =0 ; i< nums.length; i++){
-            if(!exists.add(nums[i])){
+            if(!seen.add(nums[i])){
                 return true;
             }
         }
         return false;
     }
+
+
 }
