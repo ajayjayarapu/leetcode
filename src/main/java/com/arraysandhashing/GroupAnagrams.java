@@ -11,10 +11,14 @@ public class GroupAnagrams {
      */
     public static void main(String[] args) {
         String[] strs = {"eat","tea","tan","ate","nat","bat"};
-        List<List<String>> result = groupAnagrams(strs);
+        List<List<String>> result = groupAnagramsUsingSort(strs);
         System.out.println(result);
+        System.out.println("======================================================================");
+        List<List<String>> res = groupAnagrams(strs);
+        System.out.println(res);
+
     }
-    public static List<List<String>> groupAnagrams(String[] strs) {
+    public static List<List<String>> groupAnagramsUsingSort(String[] strs) {
 
         if (strs.length == 1)
             return List.of(List.of(strs[0]));
@@ -33,5 +37,26 @@ public class GroupAnagrams {
         }
 
         return new ArrayList<>(mapOfAnagrams.values());
+    }
+
+    public static List<List<String>> groupAnagrams(String[] strs) {
+        if(strs.length == 1)
+            return List.of(List.of(strs[0]));
+
+        Map<String, List<String>> lookUp = new HashMap();
+
+        for(String str : strs){
+
+            char[] strChar = str.toCharArray();
+            int[] counter = new int[26];
+            for(char c : strChar){
+                counter[c-'a']++;
+            }
+            String key = Arrays.toString(counter);
+
+            lookUp.computeIfAbsent(key, k -> new ArrayList()).add(str);
+        }
+        return new ArrayList<>(lookUp.values());
+
     }
 }
