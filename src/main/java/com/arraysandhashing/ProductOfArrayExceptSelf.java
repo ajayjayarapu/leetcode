@@ -21,6 +21,18 @@ public class ProductOfArrayExceptSelf {
         for(int i = 0; i< output.length; i++){
             System.out.print(output[i]+" ");
         }
+        System.out.println("\n============================================================================");
+        int[] output11 = productExceptSelfUsingPrefixSuffixOptimal(nums);
+        for(int i = 0; i< output11.length; i++){
+            System.out.print(output11[i]+" ");
+        }
+        System.out.println("\n============================================================================");
+        int[] output1 = productExceptSelfUsingPrefixSuffix(nums);
+        for(int i = 0; i< output1.length; i++){
+            System.out.print(output1[i]+" ");
+        }
+
+
     }
 
     public static int[] productExceptSelfUsing2ForLoops(int[] nums) {
@@ -40,15 +52,25 @@ public class ProductOfArrayExceptSelf {
       return  out;
     }
     public static int[] productExceptSelfUsingDivision(int[] nums){
-        if(nums.length == 0)
-            return  new int[] {};
+
         int[] out = new int[nums.length];
-        int result = 1;
+        int result = 1, zeroCount = 0;
         for(int i = 0; i < nums.length; i++){
-            result *= nums[i];
+            if(nums[i] != 0) {
+                result *= nums[i];
+            }else{
+                zeroCount++;
+            }
         }
+        if(zeroCount > 1)
+            return new int[nums.length];
+
         for(int i =0; i<nums.length; i++){
-           out[i] = result/nums[i];
+            if (zeroCount > 0) {
+                out[i] = (nums[i] == 0) ? result : 0;
+            } else {
+                out[i] = result / nums[i];
+            }
         }
       return  out;
     }
